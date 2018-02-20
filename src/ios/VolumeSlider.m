@@ -41,10 +41,6 @@
 		return;
 	}
 
-	if (self.mpVolumeViewParentView != NULL) {
-			return; //already created, don't need to create it again
-	}
-
 	CGFloat originx,originy,width;
 	CGFloat height = 30;
 
@@ -65,6 +61,23 @@
 								 height
 								 );
 
+	
+	if (self.mpVolumeViewParentView != NULL) { // update current instance
+		[self.mpVolumeViewParentView setFrame:viewRect];
+		[self.myVolumeView setFrame:self.mpVolumeViewParentView.bounds];
+		if([color isEqual: @"white"]){
+			[self.myVolumeView setRouteButtonImage:[UIImage imageNamed:@"icon-airplaywhite"] forState:UIControlStateNormal];
+			[self.myVolumeView setRouteButtonImage:[UIImage imageNamed:@"icon-airplayprimary"] forState:UIControlStateHighlighted];
+			[self.myVolumeView setRouteButtonImage:[UIImage imageNamed:@"icon-airplayprimary"] forState:UIControlStateSelected];
+		}
+		if([color isEqual: @"black"]){
+			[self.myVolumeView setRouteButtonImage:[UIImage imageNamed:@"icon-airplay"] forState:UIControlStateNormal];
+			[self.myVolumeView setRouteButtonImage:[UIImage imageNamed:@"icon-airplayprimary"] forState:UIControlStateHighlighted];
+			[self.myVolumeView setRouteButtonImage:[UIImage imageNamed:@"icon-airplayprimary"] forState:UIControlStateSelected];
+		}
+		return; //already created, don't need to create it again
+	}
+	
 	self.mpVolumeViewParentView = [[UIView alloc] initWithFrame:viewRect];
 
 	[self.webView.superview addSubview:mpVolumeViewParentView];
